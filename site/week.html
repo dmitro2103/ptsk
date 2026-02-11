@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Неделя ПЦК | ПЦК Физико-математических дисциплин</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/browser-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+    /* УЛУЧШЕННЫЙ СТИЛЬ ДЛЯ СТРАНИЦЫ НЕДЕЛИ ПЦК */
+    
+    /* О мероприятии */
+    .event-info {
+        padding: 60px 0;
+    }
+    
+    .event-description h2 {
+        font-size: 2.5rem;
+        color: var(--text-light);
+        margin-bottom: 30px;
+    }
+    
+    .event-description > p {
+        color: var(--text-muted-light);
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 50px;
+        max-width: 800px;
+    }
+    
+    .event-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 30px;
+        margin-top: 50px;
+    }
+    
+    .event-stats .stat {
+        text-align: center;
+        padding: 30px 20px;
+        background: var(--bg-card-light);
+        border-radius: 20px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .event-stats .stat:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow);
+        border-color: var(--primary);
+    }
+    
+    .event-stats .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 10px;
+        display: block;
+        -webkit-text-fill-color: var(--primary);
+    }
+    
+    [data-theme="dark"] .event-stats .stat-number {
+        color: var(--primary-light);
+        -webkit-text-fill-color: var(--primary-light);
+    }
+    
+    .event-stats .stat-label {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .event-highlights {
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(6, 182, 212, 0.05));
+        border-radius: 20px;
+        padding: 40px;
+        margin-top: 60px;
+        border: 1px solid var(--border-light);
+    }
+    
+    .event-highlights h3 {
+        color: var(--text-light);
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+    }
+    
+    .highlights-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .highlights-list li {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: var(--text-light);
+        font-size: 1.05rem;
+        padding: 12px 0;
+    }
+    
+    .highlights-list li i {
+        color: var(--primary);
+        font-size: 1.2rem;
+        width: 30px;
+    }
+    
+    /* Программа мероприятий */
+    .program-section {
+        padding: 80px 0;
+        background: var(--bg-light);
+    }
+    
+    .program-filters {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 40px 0 60px;
+    }
+    
+    .program-filters .filter-btn {
+        padding: 15px 30px;
+        background: var(--bg-card-light);
+        border: 2px solid var(--border-light);
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+        font-size: 1rem;
+    }
+    
+    .program-filters .filter-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+    }
+    
+    .program-filters .filter-btn:hover:not(.active) {
+        border-color: var(--primary);
+        transform: translateY(-3px);
+    }
+    
+    /* Улучшенная таблица мероприятий */
+    .events-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--bg-card-light);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-light);
+    }
+    
+    .events-table th {
+        background: linear-gradient(135deg, var(--primary), var(--primary-light));
+        color: white;
+        padding: 25px 20px;
+        text-align: left;
+        font-weight: 700;
+        font-size: 1.1rem;
+        font-family: var(--font-heading);
+    }
+    
+    .events-table td {
+        padding: 25px 20px;
+        border-bottom: 1px solid var(--border-light);
+        vertical-align: middle;
+        color: var(--text-muted-light);
+    }
+    
+    .events-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .event-time {
+        min-width: 120px;
+    }
+    
+    .event-date {
+        color: var(--primary);
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin: 0;
+        justify-content: flex-start;
+    }
+    
+    .event-hour {
+        font-size: 0.95rem;
+        color: var(--text-muted-light);
+        font-weight: 500;
+        margin-top: 5px;
+    }
+    
+    .event-name {
+        font-weight: 700;
+        color: var(--text-light);
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-family: var(--font-heading);
+    }
+    
+    .event-description {
+        color: var(--text-muted-light);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .event-responsible {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    .responsible-avatar {
+        width: 50px;
+        height: 50px;
+        background: var(--bg-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1.1rem;
+        flex-shrink: 0;
+    }
+    
+    /* Участие */
+    .participation-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.03), rgba(6, 182, 212, 0.03));
+    }
+    
+    .participation-info h2 {
+        font-size: 2.5rem;
+        color: var(--text-light);
+        margin-bottom: 60px;
+        text-align: center;
+    }
+    
+    .participation-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+    
+    .participation-steps .step {
+        text-align: center;
+        position: relative;
+        padding: 40px 30px;
+        background: var(--bg-card-light);
+        border-radius: 20px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+    }
+    
+    .participation-steps .step:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow);
+        border-color: var(--primary);
+    }
+    
+    .participation-steps .step-number {
+        width: 50px;
+        height: 50px;
+        background: var(--bg-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0 auto 25px;
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+    }
+    
+    .participation-steps .step h3 {
+        color: var(--text-light);
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+    }
+    
+    .participation-steps .step p {
+        color: var(--text-muted-light);
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    .registration-cta {
+        background: var(--bg-card-light);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        border: 2px solid var(--primary);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .registration-cta h3 {
+        color: var(--text-light);
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+    }
+    
+    .registration-cta p {
+        color: var(--text-muted-light);
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+    
+    /* Организаторы */
+    .organizers-section {
+        padding: 80px 0;
+        background: var(--bg-light);
+    }
+    
+    .organizer-avatar {
+        width: 70px;
+        height: 70px;
+        background: var(--bg-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 1.3rem;
+        margin: 0 auto 25px;
+        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+    }
+    
+    .organizers-section .info-card {
+        text-align: center;
+        padding: 40px 30px;
+    }
+    
+    .organizers-section .info-card h4 {
+        color: var(--text-light);
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+    }
+    
+    .organizers-section .info-card > p {
+        color: var(--text-muted-light);
+        margin-bottom: 15px;
+        font-size: 1rem;
+    }
+    
+    .organizer-contact {
+        color: var(--primary) !important;
+        font-weight: 500;
+        font-size: 0.95rem !important;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 1024px) {
+        .highlights-list {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .event-stats {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .highlights-list {
+            grid-template-columns: 1fr;
+        }
+        
+        .program-filters {
+            gap: 10px;
+        }
+        
+        .program-filters .filter-btn {
+            padding: 12px 20px;
+            font-size: 0.9rem;
+        }
+        
+        .events-table {
+            display: block;
+            overflow-x: auto;
+        }
+        
+        .events-table th,
+        .events-table td {
+            padding: 20px 15px;
+        }
+        
+        .participation-steps {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .event-stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .event-stats .stat {
+            padding: 25px 20px;
+        }
+        
+        .participation-steps {
+            grid-template-columns: 1fr;
+        }
+        
+        .registration-cta {
+            padding: 30px 20px;
+        }
+    }
+    
+    /* Специальные стили для даты в заголовке страницы */
+    .page-header .event-date-main {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        font-size: 1.4rem;
+        color: rgba(255, 255, 255, 0.95);
+        margin-top: 25px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px 30px;
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        animation: pulse 2s infinite;
+    }
+    
+    .page-header .event-date-main i {
+        font-size: 1.2rem;
+        color: #FFD700;
+    }
+    
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+        }
+        70% {
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+        }
+    }
+</style>
+
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ПЦК ФМД</h1>
+                        <p>Университетский колледж ОГУ</p>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="staff.html"><i class="fas fa-chalkboard-teacher"></i> Состав ПЦК</a></li>
+                        <li><a href="disciplines.html"><i class="fas fa-book"></i> Дисциплины</a></li>
+                        <li><a href="additional-edu.html"><i class="fas fa-graduation-cap"></i> Доп. образование</a></li>
+                        <li><a href="week.html" class="active"><i class="fas fa-calendar-week"></i> Неделя ПЦК</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <!-- Заголовок страницы -->
+            <div class="page-header">
+                <h1 class="page-title">Неделя предметно-цикловой комиссии</h1>
+                <p class="page-subtitle">Традиционное ежегодное мероприятие, посвященное физико-математическим наукам</p>
+                <div class="event-date-main animate-on-scroll">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>15 - 19 апреля 2024 года</span>
+                </div>
+            </div>
+            
+            <!-- О мероприятии -->
+            <div class="event-info">
+                <div class="event-description">
+                    <h2>О неделе ПЦК</h2>
+                    <p>Ежегодная неделя предметно-цикловой комиссии Физико-математических дисциплин - это масштабное мероприятие, объединяющее студентов и преподавателей вокруг науки. В течение недели проходят олимпиады, конкурсы, научные семинары, мастер-классы и творческие мероприятия, направленные на популяризацию физико-математических наук.</p>
+                    
+                    <div class="event-stats">
+                        <div class="stat animate-on-scroll">
+                            <div class="stat-number" data-count="25">0</div>
+                            <div class="stat-label">Мероприятий</div>
+                        </div>
+                        <div class="stat animate-on-scroll">
+                            <div class="stat-number" data-count="300">0</div>
+                            <div class="stat-label">Участников</div>
+                        </div>
+                        <div class="stat animate-on-scroll">
+                            <div class="stat-number" data-count="19">0</div>
+                            <div class="stat-label">Преподавателей</div>
+                        </div>
+                        <div class="stat animate-on-scroll">
+                            <div class="stat-number" data-count="15">0</div>
+                            <div class="stat-label">Групп</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-highlights">
+                    <h3>Ключевые мероприятия:</h3>
+                    <ul class="highlights-list">
+                        <li><i class="fas fa-trophy"></i> Олимпиады по математике и физике</li>
+                        <li><i class="fas fa-users"></i> Научно-практическая конференция</li>
+                        <li><i class="fas fa-lightbulb"></i> Конкурс исследовательских работ</li>
+                        <li><i class="fas fa-gamepad"></i> Интеллектуальные игры и квизы</li>
+                        <li><i class="fas fa-paint-brush"></i> Творческие конкурсы</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Программа мероприятий -->
+            <div class="program-section">
+                <h2 class="section-title">Программа мероприятий</h2>
+                
+                <div class="program-filters">
+                    <button class="filter-btn active" data-day="all">Все дни</button>
+                    <button class="filter-btn" data-day="mon">Понедельник</button>
+                    <button class="filter-btn" data-day="tue">Вторник</button>
+                    <button class="filter-btn" data-day="wed">Среда</button>
+                    <button class="filter-btn" data-day="thu">Четверг</button>
+                    <button class="filter-btn" data-day="fri">Пятница</button>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="events-table">
+                        <thead>
+                            <tr>
+                                <th>Дата и время</th>
+                                <th>Мероприятие</th>
+                                <th>Ответственный</th>
+                                <th>Место проведения</th>
+                                <th>Участники</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Понедельник -->
+                            <tr data-day="mon" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">15.04</div>
+                                        <div class="event-hour">10:00 - 11:30</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Торжественное открытие недели ПЦК</div>
+                                    <div class="event-description">Приветственные слова, представление программы недели</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">ТА</div>
+                                        <span>Т.В. Атяскина</span>
+                                    </div>
+                                </td>
+                                <td>Актовый зал</td>
+                                <td>Все группы 1-2 курсов</td>
+                            </tr>
+                            
+                            <tr data-day="mon" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">15.04</div>
+                                        <div class="event-hour">12:00 - 14:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Круглый стол «Математика со всех сторон»</div>
+                                    <div class="event-description">Обсуждение современных тенденций в математике</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">МБ</div>
+                                        <span>М.В. Безрукова</span>
+                                    </div>
+                                </td>
+                                <td>Аудитория 215</td>
+                                <td>Студенты 2-3 курсов</td>
+                            </tr>
+                            
+                            <!-- Вторник -->
+                            <tr data-day="tue" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">16.04</div>
+                                        <div class="event-hour">10:00 - 12:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Конкурс презентаций «Математика вокруг нас»</div>
+                                    <div class="event-description">Студенческие презентации о применении математики в реальной жизни</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">ОБ</div>
+                                        <span>О.И. Белицкая</span>
+                                    </div>
+                                </td>
+                                <td>Аудитория 310</td>
+                                <td>1-2 курсы</td>
+                            </tr>
+                            
+                            <tr data-day="tue" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">16.04</div>
+                                        <div class="event-hour">14:00 - 16:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Конкурс «Физика в игрушках»</div>
+                                    <div class="event-description">Демонстрация физических принципов в игрушках и бытовых приборах</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">АВ</div>
+                                        <span>А.А. Викторова</span>
+                                    </div>
+                                </td>
+                                <td>Лаборатория физики</td>
+                                <td>Все желающие</td>
+                            </tr>
+                            
+                            <!-- Среда -->
+                            <tr data-day="wed" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">17.04</div>
+                                        <div class="event-hour">10:00 - 12:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Интеллектуальная игра «Физбол»</div>
+                                    <div class="event-description">Соревнование по решению физических задач с элементами спорта</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">АВ</div>
+                                        <span>А.А. Викторова</span>
+                                    </div>
+                                </td>
+                                <td>Спортивный зал</td>
+                                <td>Команды групп</td>
+                            </tr>
+                            
+                            <tr data-day="wed" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">17.04</div>
+                                        <div class="event-hour">13:00 - 15:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Интеллектуальная игра «Битва умов»</div>
+                                    <div class="event-description">Викторина по математике и естественным наукам</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">НВ</div>
+                                        <span>Н.А. Викулова</span>
+                                    </div>
+                                </td>
+                                <td>Актовый зал</td>
+                                <td>Сборные команды</td>
+                            </tr>
+                            
+                            <!-- Четверг -->
+                            <tr data-day="thu" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">18.04</div>
+                                        <div class="event-hour">09:00 - 12:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Олимпиада по математике</div>
+                                    <div class="event-description">Индивидуальное соревнование по математике для студентов</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">ИХ</div>
+                                        <span>И.С. Ходырева</span>
+                                    </div>
+                                </td>
+                                <td>Аудитории 215, 216</td>
+                                <td>Студенты 1 курса</td>
+                            </tr>
+                            
+                            <tr data-day="thu" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">18.04</div>
+                                        <div class="event-hour">14:00 - 16:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Научно-практическая конференция «В мире физики»</div>
+                                    <div class="event-description">Защита студенческих исследовательских проектов по физике</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">НТ</div>
+                                        <span>Н.В. Тесля</span>
+                                    </div>
+                                </td>
+                                <td>Конференц-зал</td>
+                                <td>Студенты 2-3 курсов</td>
+                            </tr>
+                            
+                            <!-- Пятница -->
+                            <tr data-day="fri" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">19.04</div>
+                                        <div class="event-hour">10:00 - 12:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Математический турнир</div>
+                                    <div class="event-description">Командное соревнование по решению задач повышенной сложности</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">ЮК</div>
+                                        <span>Ю.М. Каримова</span>
+                                    </div>
+                                </td>
+                                <td>Актовый зал</td>
+                                <td>Команды групп</td>
+                            </tr>
+                            
+                            <tr data-day="fri" class="animate-on-scroll">
+                                <td>
+                                    <div class="event-time">
+                                        <div class="event-date">19.04</div>
+                                        <div class="event-hour">14:00 - 16:00</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="event-name">Торжественное закрытие. Награждение победителей</div>
+                                    <div class="event-description">Подведение итогов недели, вручение грамот, дипломов и призов</div>
+                                </td>
+                                <td>
+                                    <div class="event-responsible">
+                                        <div class="responsible-avatar">ТА</div>
+                                        <span>Т.В. Атяскина</span>
+                                    </div>
+                                </td>
+                                <td>Актовый зал</td>
+                                <td>Все участники</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Участие -->
+            <div class="participation-section">
+                <div class="participation-info">
+                    <h2>Как принять участие?</h2>
+                    
+                    <div class="participation-steps">
+                        <div class="step animate-on-scroll">
+                            <div class="step-number">1</div>
+                            <h3>Выберите мероприятие</h3>
+                            <p>Изучите программу и выберите мероприятия, в которых хотите участвовать</p>
+                        </div>
+                        
+                        <div class="step animate-on-scroll">
+                            <div class="step-number">2</div>
+                            <h3>Обратитесь к куратору</h3>
+                            <p>Сообщите куратору группы или ответственному преподавателю о своем участии</p>
+                        </div>
+                        
+                        <div class="step animate-on-scroll">
+                            <div class="step-number">3</div>
+                            <h3>Подготовьтесь</h3>
+                            <p>Изучите материалы и подготовьтесь к выступлению или соревнованию</p>
+                        </div>
+                        
+                        <div class="step animate-on-scroll">
+                            <div class="step-number">4</div>
+                            <h3>Участвуйте и побеждайте!</h3>
+                            <p>Приходите на мероприятие и покажите свои знания и навыки</p>
+                        </div>
+                    </div>
+                    
+                    <div class="registration-cta animate-on-scroll">
+                        <h3>Участие открыто для всех студентов!</h3>
+                        <p>Для получения дополнительной информации обратитесь к куратору вашей группы.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Контакты организаторов -->
+            <div id="contact" class="organizers-section">
+                <h2 class="section-title">Организационный комитет</h2>
+                
+                <div class="additional-info">
+                    <div class="info-card animate-on-scroll">
+                        <div class="organizer-avatar">
+                            <span>ТА</span>
+                        </div>
+                        <h4>Т.В. Атяскина</h4>
+                        <p>Председатель оргкомитета</p>
+                        <p class="organizer-contact">pck_physics_math@college.ogu.ru</p>
+                    </div>
+                    
+                    <div class="info-card animate-on-scroll">
+                        <div class="organizer-avatar">
+                            <span>ОБ</span>
+                        </div>
+                        <h4>О.И. Белицкая</h4>
+                        <p>Координатор мероприятий</p>
+                        <p class="organizer-contact">belitskaya@college.ogu.ru</p>
+                    </div>
+                    
+                    <div class="info-card animate-on-scroll">
+                        <div class="organizer-avatar">
+                            <span>МБ</span>
+                        </div>
+                        <h4>М.В. Безрукова</h4>
+                        <p>Ответственная за олимпиады</p>
+                        <p class="organizer-contact">bezrukova@college.ogu.ru</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>ПЦК ФМД</h3>
+                        <p>Предметно-цикловая комиссия<br>Физико-математических дисциплин</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Неделя ПЦК 2024</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Программа мероприятий</a></li>
+                        <li><a href="#">Результаты прошлых лет</a></li>
+                        <li><a href="#">Информация для участников</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Контакты оргкомитета</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> ул. Одесская, 148</p>
+                    <p><i class="fas fa-phone"></i> +7 (3532) 77-88-99</p>
+                    <p><i class="fas fa-envelope"></i> pck_week@college.ogu.ru</p>
+                    <p><i class="fas fa-clock"></i> Время проведения: 15-19 апреля</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Партнеры</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Оренбургский государственный университет</a></li>
+                        <li><a href="#">Министерство образования Оренбургской области</a></li>
+                        <li><a href="#">Научное общество студентов</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ПЦК Физико-математических дисциплин Университетского колледжа ОГУ</p>
+                <p>Неделя ПЦК ФМД проводится ежегодно в апреле</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Фильтрация мероприятий по дням
+        document.querySelectorAll('.program-filters .filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Убираем активный класс у всех кнопок
+                document.querySelectorAll('.program-filters .filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+                
+                // Добавляем активный класс текущей кнопке
+                this.classList.add('active');
+                
+                const day = this.dataset.day;
+                const rows = document.querySelectorAll('.events-table tbody tr');
+                
+                rows.forEach(row => {
+                    if (day === 'all' || row.dataset.day === day) {
+                        row.style.display = 'table-row';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

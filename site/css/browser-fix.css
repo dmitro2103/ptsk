@@ -1,0 +1,86 @@
+/* Фиксы для браузеров */
+.browser-yandex .floating-elements .element {
+    animation: float 8s ease-in-out infinite;
+}
+
+.browser-yandex .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+}
+
+.browser-ie .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
+}
+
+.browser-ie .btn::before {
+    display: none;
+}
+
+.browser-ie .stat-number {
+    animation: none;
+}
+
+.browser-ie .map-container iframe {
+    min-height: 300px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .hero {
+        background: linear-gradient(135deg, #1a237e 0%, #5c6bc0 100%);
+    }
+    
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .browser-yandex .floating-elements {
+        height: 300px;
+    }
+}
+
+/* ФИКС ЛОГОТИПА ДЛЯ ВСЕХ ТЕМ - ПРОСТО И НАДЕЖНО */
+.logo-text h1 {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    background: none !important;
+    text-shadow: none !important;
+}
+
+.logo-text p {
+    color: #333333 !important;
+}
+
+[data-theme="dark"] .logo-text h1 {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .logo-text p {
+    color: #CCCCCC !important;
+}
+
+/* Усиленные стили для гарантии */
+.header .logo-text h1,
+.header .logo .logo-text h1 {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+}
+
+.header .logo-text p,
+.header .logo .logo-text p {
+    color: #333333 !important;
+}
+
+[data-theme="dark"] .header .logo-text h1,
+[data-theme="dark"] .header .logo .logo-text h1 {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .header .logo-text p,
+[data-theme="dark"] .header .logo .logo-text p {
+    color: #CCCCCC !important;
+}

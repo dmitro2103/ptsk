@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ПЦК Физико-математических дисциплин | Университетский колледж ОГУ</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/browser-fix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* КОМПАКТНЫЙ ГЕРОЙ С ТЕКСТОМ В ОДИН РЯД */
+    
+    .hero {
+        padding: 140px 0 100px;
+        background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero .container {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 40px;
+        max-width: 1400px;
+    }
+    
+    .hero-content {
+        flex: 1;
+        text-align: left;
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-left: 0;
+        padding-right: 30px;
+    }
+    
+    .hero-title {
+        font-size: 2.6rem;
+        line-height: 1.15;
+        margin: 0;
+        color: white;
+        font-weight: 800;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.05rem;
+        margin: 0;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.5;
+        max-width: 600px;
+        font-weight: 400;
+    }
+    
+    .hero-cta {
+        margin-top: 5px;
+    }
+    
+    .hero-btns {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 5px;
+    }
+    
+    /* Компактные кнопки */
+    .btn-primary, .btn-teachers, .btn-secondary {
+        padding: 10px 20px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .btn-primary {
+        background: white;
+        color: var(--primary);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-teachers {
+        background: linear-gradient(135deg, #ec4899, #f472b6);
+        color: white;
+        box-shadow: 0 2px 10px rgba(236, 72, 153, 0.2);
+    }
+    
+    .btn-teachers:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+    }
+    
+    .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    
+    .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-1px);
+    }
+    
+    /* Треугольное расположение иконок */
+    .hero-animated-elements {
+        position: relative;
+        width: 240px;
+        height: 200px;
+        flex-shrink: 0;
+        margin-top: 10px;
+    }
+    
+    .hero-element {
+        position: absolute;
+        width: 75px;
+        height: 75px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.25);
+        animation: subtle-float 6s ease-in-out infinite;
+        opacity: 0.9;
+        transition: all 0.3s ease;
+    }
+    
+    @keyframes subtle-float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-8px) rotate(3deg);
+        }
+    }
+    
+    /* Треугольное расположение */
+    .hero-element.math-logo {
+        top: 15px;
+        right: 25px;
+        animation-delay: 0s;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(29, 78, 216, 0.9));
+    }
+    
+    .hero-element.physics-logo {
+        bottom: 35px;
+        left: 5px;
+        animation-delay: 1s;
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9));
+    }
+    
+    .hero-element.informatics-logo {
+        bottom: 15px;
+        right: 70px;
+        animation-delay: 2s;
+        background: linear-gradient(135deg, rgba(34, 197, 94, 0.9), rgba(21, 128, 61, 0.9));
+    }
+    
+    .hero-element:hover {
+        transform: scale(1.08);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Секция о комиссии */
+    .commission-section {
+        padding: 80px 0 60px;
+        background: var(--bg-light);
+    }
+    
+    .commission-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    
+    .commission-header h2 {
+        font-size: 2.5rem;
+        color: var(--text-light);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .commission-header h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--bg-gradient);
+        border-radius: 2px;
+    }
+    
+    .commission-header .subtitle {
+        font-size: 1.1rem;
+        color: var(--text-muted-light);
+        max-width: 700px;
+        margin: 20px auto 0;
+        line-height: 1.6;
+    }
+    
+    .commission-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+    }
+    
+    .commission-card {
+        background: var(--bg-card-light);
+        border-radius: 16px;
+        padding: 30px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .commission-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+    
+    .commission-card .icon {
+        width: 60px;
+        height: 60px;
+        background: var(--bg-gradient);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        color: white;
+        font-size: 1.5rem;
+        box-shadow: 0 6px 15px rgba(79, 70, 229, 0.2);
+    }
+    
+    .commission-card h3 {
+        font-size: 1.3rem;
+        color: var(--text-light);
+        margin-bottom: 12px;
+        font-weight: 700;
+    }
+    
+    .commission-card p {
+        color: var(--text-muted-light);
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    
+    /* Задачи комиссии */
+    .tasks-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, rgba(79, 70, 229, 0.03), rgba(6, 182, 212, 0.03));
+    }
+    
+    .tasks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .task-item {
+        background: var(--bg-card-light);
+        border-radius: 14px;
+        padding: 25px;
+        border-left: 4px solid var(--primary);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        transition: all 0.25s ease;
+    }
+    
+    .task-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .task-number {
+        background: var(--bg-gradient);
+        color: white;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        flex-shrink: 0;
+        font-size: 1rem;
+    }
+    
+    .task-text {
+        color: var(--text-light);
+        line-height: 1.6;
+        margin: 0;
+        font-size: 1rem;
+    }
+    
+    /* Миссия и цели */
+    .mission-section {
+        padding: 100px 0;
+        background: var(--bg-gradient);
+        color: white;
+        position: relative;
+        animation: gradientShift 15s ease infinite;
+        background-size: 300% 300%;
+    }
+    
+    .mission-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .mission-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 18px;
+        padding: 35px;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        transition: all 0.3s ease;
+    }
+    
+    .mission-card:hover {
+        background: rgba(255, 255, 255, 0.15);
+        transform: translateY(-8px);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+    
+    /* Статистика */
+    .stats-section {
+        padding: 80px 0;
+        background: var(--bg-light);
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 25px;
+        text-align: center;
+    }
+    
+    .stat-item {
+        padding: 30px 20px;
+        background: var(--bg-card-light);
+        border-radius: 18px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stat-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary);
+    }
+    
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: var(--primary);
+        display: block;
+        line-height: 1;
+    }
+    
+    .stat-label {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        font-weight: 600;
+    }
+    
+    /* Адаптивность */
+    @media (max-width: 1100px) {
+        .hero .container {
+            gap: 30px;
+        }
+        
+        .hero-title {
+            font-size: 2.3rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1rem;
+        }
+        
+        .hero-animated-elements {
+            width: 200px;
+            height: 170px;
+        }
+        
+        .hero-element {
+            width: 65px;
+            height: 65px;
+            font-size: 1.7rem;
+        }
+        
+        .hero-element.math-logo {
+            top: 15px;
+            right: 15px;
+        }
+        
+        .hero-element.physics-logo {
+            bottom: 30px;
+            left: 5px;
+        }
+        
+        .hero-element.informatics-logo {
+            bottom: 10px;
+            right: 50px;
+        }
+    }
+    
+    @media (max-width: 900px) {
+        .hero {
+            padding: 120px 0 80px;
+        }
+        
+        .hero .container {
+            flex-direction: column;
+            text-align: center;
+            gap: 40px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            padding-right: 0;
+            align-items: center;
+        }
+        
+        .hero-subtitle {
+            margin: 0 auto;
+        }
+        
+        .hero-btns {
+            justify-content: center;
+        }
+        
+        .hero-animated-elements {
+            width: 280px;
+            height: 140px;
+        }
+        
+        /* Горизонтальное расположение иконок на планшетах */
+        .hero-element {
+            position: relative;
+            display: inline-block;
+            margin: 0 12px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .hero-element.math-logo,
+        .hero-element.physics-logo,
+        .hero-element.informatics-logo {
+            position: relative;
+            display: inline-block;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0 12px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.95rem;
+        }
+        
+        .hero-btns {
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .hero-btns .btn {
+            width: 100%;
+            max-width: 240px;
+        }
+        
+        .commission-header h2 {
+            font-size: 2rem;
+        }
+        
+        .commission-cards,
+        .tasks-grid,
+        .mission-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .hero-animated-elements {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .hero-element {
+            width: 55px;
+            height: 55px;
+            font-size: 1.4rem;
+            margin: 0;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .hero {
+            padding: 100px 0 60px;
+        }
+        
+        .hero-title {
+            font-size: 1.8rem;
+            line-height: 1.3;
+        }
+        
+        .hero-subtitle {
+            font-size: 0.9rem;
+        }
+        
+        .hero-element {
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+        }
+        
+        .commission-header h2 {
+            font-size: 1.8rem;
+        }
+        
+        .commission-card {
+            padding: 25px 20px;
+        }
+        
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ФИКС ЛОГОТИПА */
+.header .logo .logo-text h1,
+.header .logo-text h1,
+.logo-text h1 {
+    color: #000000 !important;
+    -webkit-text-fill-color: #000000 !important;
+    background: none !important;
+    background-image: none !important;
+    text-shadow: none !important;
+    font-weight: 700 !important;
+}
+
+.header .logo .logo-text p,
+.header .logo-text p,
+.logo-text p {
+    color: #333333 !important;
+    font-weight: 500 !important;
+    opacity: 0.9 !important;
+}
+
+[data-theme="dark"] .header .logo .logo-text h1,
+[data-theme="dark"] .header .logo-text h1,
+[data-theme="dark"] .logo-text h1 {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+}
+
+[data-theme="dark"] .header .logo .logo-text p,
+[data-theme="dark"] .header .logo-text p,
+[data-theme="dark"] .logo-text p {
+    color: #CCCCCC !important;
+}
+</style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ПЦК ФМД</h1>
+                        <p>Университетский колледж ОГУ</p>
+                    </div>
+                </a>
+                
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Главная</a></li>
+                        <li><a href="staff.html"><i class="fas fa-chalkboard-teacher"></i> Состав ПЦК</a></li>
+                        <li><a href="disciplines.html"><i class="fas fa-book"></i> Дисциплины</a></li>
+                        <li><a href="additional-edu.html"><i class="fas fa-graduation-cap"></i> Доп. образование</a></li>
+                        <li><a href="week.html"><i class="fas fa-calendar-week"></i> Неделя ПЦК</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Переключить тему">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="mobile-menu-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Компактная герой секция -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Предметно-цикловая комиссия<br>Физико-математических дисциплин</h1>
+                <p class="hero-subtitle">Формируем фундаментальные знания, развиваем аналитическое мышление, готовим специалистов для технологичного будущего</p>
+                <div class="hero-cta">
+                    <div class="hero-btns">
+                        <a href="#commission" class="btn btn-primary">О комиссии</a>
+                        <a href="staff.html" class="btn btn-teachers">Наши преподаватели</a>
+                        <a href="disciplines.html" class="btn btn-secondary">Дисциплины</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Треугольное расположение иконок -->
+            <div class="hero-animated-elements">
+                <div class="hero-element math-logo">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="hero-element physics-logo">
+                    <i class="fas fa-atom"></i>
+                </div>
+                <div class="hero-element informatics-logo">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Информация о комиссии -->
+    <section id="commission" class="commission-section">
+        <div class="container">
+            <div class="commission-header">
+                <h2>О предметно-цикловой комиссии</h2>
+                <p class="subtitle">Мы обеспечиваем качественное физико-математическое образование, формируя компетенции, необходимые для успешной профессиональной деятельности</p>
+            </div>
+            
+            <div class="commission-cards">
+                <div class="commission-card">
+                    <div class="icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3>Основана в 2017 году</h3>
+                    <p>Предметно-цикловая комиссия физико-математических дисциплин осуществляет свою деятельность с 2017 года, постоянно совершенствуя образовательный процесс.</p>
+                </div>
+                
+                <div class="commission-card">
+                    <div class="icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Руководство</h3>
+                    <p>Председатель предметно-цикловой комиссии — Лукерина Ольга Александровна, опытный педагог и руководитель.</p>
+                </div>
+                
+                <div class="commission-card">
+                    <div class="icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Методическая проблема</h3>
+                    <p>Система подготовки специалистов среднего звена с учетом требований экономики и запросов рынка труда.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Задачи комиссии -->
+    <section class="tasks-section">
+        <div class="container">
+            <div class="commission-header">
+                <h2>Основные задачи комиссии</h2>
+                <p class="subtitle">Направления деятельности на 2025-2026 учебный год</p>
+            </div>
+            
+            <div class="tasks-grid">
+                <div class="task-item">
+                    <div class="task-number">1</div>
+                    <p class="task-text">Внедрение практико-ориентированных и гибких образовательных технологий</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">2</div>
+                    <p class="task-text">Модернизация содержания учебных программ физико-математического образования на всех уровнях</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">3</div>
+                    <p class="task-text">Повышение квалификации по программе «Противодействие коррупции» и «Комплексное сопровождение образовательного процесса обучения инвалидов и лиц с ограниченными возможностями здоровья»</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">4</div>
+                    <p class="task-text">Обеспечение отсутствия пробелов в базовых знаниях для каждого обучающегося</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">5</div>
+                    <p class="task-text">Обеспечение наличия общедоступных информационных ресурсов, необходимых для реализации учебных программ физико-математического образования</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">6</div>
+                    <p class="task-text">Повышение качества работы преподавателей физико-математического образования, выявление новых активных лидеров среди педагогов</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">7</div>
+                    <p class="task-text">Обеспечение обучающимся, имеющим высокую мотивацию и проявляющим выдающиеся физико-математические способности, всех условий для развития и применения этих способностей</p>
+                </div>
+                
+                <div class="task-item">
+                    <div class="task-number">8</div>
+                    <p class="task-text">Популяризация физико-математических знаний и математического образования</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Миссия и цели -->
+    <section class="mission-section">
+        <div class="container">
+            <h2 class="section-title">Миссия и стратегические цели</h2>
+            <p class="section-subtitle">Наш вклад в образование и развитие студентов</p>
+            
+            <div class="mission-cards">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Наша миссия</h3>
+                    <p>Формирование у студентов научного мировоззрения через углублённое изучение физико-математических дисциплин, развитие критического мышления и способности применять фундаментальные знания в профессиональной деятельности.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Наше видение</h3>
+                    <p>Стать ведущим центром физико-математического образования в системе СПО, признанным за инновационные методики преподавания, высокое качество подготовки и интеграцию с реальным сектором экономики.</p>
+                </div>
+                
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>Наши цели</h3>
+                    <p>Внедрение цифровых технологий в образовательный процесс, развитие исследовательской деятельности студентов, повышение квалификации преподавателей, укрепление связей с работодателями, создание современной материально-технической базы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Статистика -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="commission-header">
+                <h2>ПЦК ФМД в цифрах</h2>
+                <p class="subtitle">Количественные показатели работы комиссии</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-count="19">0</div>
+                    <div class="stat-label">Преподавателей</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="16">0</div>
+                    <div class="stat-label">Высшая категория</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="12">0</div>
+                    <div class="stat-label">Дисциплин</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="25">0</div>
+                    <div class="stat-label">Мероприятий ежегодно</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-count="2">0</div>
+                    <div class="stat-label">Кандидата наук</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <h3>ПЦК ФМД</h3>
+                        <p>Предметно-цикловая комиссия<br>Физико-математических дисциплин</p>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Быстрые ссылки</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="staff.html">Состав ПЦК</a></li>
+                        <li><a href="disciplines.html">Дисциплины</a></li>
+                        <li><a href="additional-edu.html">Доп. образование</a></li>
+                        <li><a href="week.html">Неделя ПЦК</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Ресурсы</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Методические материалы</a></li>
+                        <li><a href="#">Расписание занятий</a></li>
+                        <li><a href="#">Нормативные документы</a></li>
+                        <li><a href="#">Научные публикации</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> ул. Одесская, 148</p>
+                    <p><i class="fas fa-phone"></i> +7 (3532) 77-88-99</p>
+                    <p><i class="fas fa-envelope"></i> pck_physics_math@college.ogu.ru</p>
+                    <p><i class="fas fa-clock"></i> Пн-Пт: 9:00-17:00</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 ПЦК Физико-математических дисциплин Университетского колледжа ОГУ. Все права защищены.</p>
+                <p class="developer">Разработано студентами специальности "Информационные системы и программирование"</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Счетчик статистики
+        function animateCounter(element, start, end, duration) {
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else if (element.dataset.count && element.dataset.count.includes('+')) {
+                    element.textContent = end + '+';
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Запуск счетчиков при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const countElement = entry.target;
+                    const count = countElement.dataset.count;
+                    
+                    if (count && !countElement.classList.contains('animated')) {
+                        let target = parseInt(count);
+                        animateCounter(countElement, 0, target, 1200);
+                        countElement.classList.add('animated');
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        // Наблюдаем за всеми элементами статистики
+        document.addEventListener('DOMContentLoaded', function() {
+            const statNumbers = document.querySelectorAll('.stat-number[data-count]');
+            statNumbers.forEach(stat => {
+                observer.observe(stat);
+            });
+            
+            // Плавное появление элементов при загрузке
+            setTimeout(() => {
+                document.querySelectorAll('.commission-card, .task-item, .mission-card').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 80);
+                });
+            }, 300);
+        });
+
+        // Устанавливаем начальные стили для анимации
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.commission-card, .task-item, .mission-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(15px)';
+                el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            });
+            
+            // Плавная прокрутка для якорных ссылок
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

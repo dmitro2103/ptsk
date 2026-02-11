@@ -1,0 +1,482 @@
+/* Таблицы - современный дизайн */
+.table-responsive {
+    overflow-x: auto;
+    margin: 60px 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    background: var(--bg-card-light);
+    border: 1px solid var(--border-light);
+    position: relative;
+}
+
+.table-responsive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--bg-gradient);
+    border-radius: var(--radius) var(--radius) 0 0;
+    animation: gradientShift 6s ease infinite;
+}
+
+.data-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-card-light);
+}
+
+.data-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.data-table th {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: white;
+    padding: 25px 20px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.1rem;
+    position: relative;
+    border-bottom: 4px solid var(--secondary);
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+}
+
+.data-table th::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.data-table th:last-child::after {
+    display: none;
+}
+
+.data-table tbody tr {
+    transition: var(--transition);
+    position: relative;
+    animation: fadeInUp 0.5s ease;
+    animation-fill-mode: both;
+}
+
+.data-table tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .data-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.data-table tbody tr:hover {
+    background: rgba(6, 182, 212, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.data-table td {
+    padding: 25px 20px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+    font-size: 1.05rem;
+    color: var(--text-muted-light);
+}
+
+.data-table td:first-child {
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    width: 70px;
+    font-size: 1.2rem;
+    font-family: var(--font-heading);
+}
+
+/* Стили для таблицы преподавателей */
+.teacher-name {
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    font-family: var(--font-heading);
+}
+
+.teacher-degree {
+    font-size: 1rem;
+    color: var(--text-muted-light);
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: var(--transition);
+}
+
+.category-high {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.3));
+    color: var(--success);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+}
+
+.category-high:hover {
+    background: linear-gradient(135deg, var(--success), #059669);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+}
+
+.category-first {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.15), rgba(79, 70, 229, 0.3));
+    color: var(--primary);
+    border: 2px solid rgba(79, 70, 229, 0.3);
+}
+
+.category-first:hover {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+}
+
+.category-date {
+    font-size: 0.95rem;
+    color: var(--text-muted-light);
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.awards-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.awards-list li {
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted-light);
+}
+
+.awards-list li::before {
+    content: '🏆';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+}
+
+/* Таблица мероприятий */
+.events-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-card-light);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-light);
+}
+
+.events-table th {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: white;
+    padding: 25px;
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.1rem;
+    font-family: var(--font-heading);
+}
+
+.events-table td {
+    padding: 25px;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
+    color: var(--text-muted-light);
+}
+
+.events-table tr:last-child td {
+    border-bottom: none;
+}
+
+.event-name {
+    font-weight: 700;
+    color: var(--text-light);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-family: var(--font-heading);
+}
+
+.event-description {
+    color: var(--text-muted-light);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.event-responsible {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.responsible-avatar {
+    width: 60px;
+    height: 60px;
+    background: var(--bg-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+    animation: pulse 3s infinite;
+}
+
+.event-time {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.event-date {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+    font-family: var(--font-heading);
+}
+
+.event-hour {
+    font-size: 0.95rem;
+    color: var(--text-muted-light);
+    font-weight: 500;
+}
+
+/* Карточки дисциплин */
+.disciplines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.discipline-card {
+    background: var(--bg-card-light);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border-left: 6px solid var(--secondary);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+}
+
+.discipline-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.discipline-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--bg-gradient);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+    animation: pulse 3s infinite;
+}
+
+.discipline-card h3 {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-family: var(--font-heading);
+}
+
+.discipline-description {
+    color: var(--text-muted-light);
+    margin-bottom: 25px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px dashed var(--border-light);
+}
+
+.specialty-tag {
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.2));
+    color: var(--secondary-dark);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: 2px solid rgba(6, 182, 212, 0.2);
+    transition: var(--transition);
+}
+
+.specialty-tag:hover {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(6, 182, 212, 0.3);
+}
+
+/* Программы доп. образования */
+.programs-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.program-card {
+    background: var(--bg-card-light);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    position: relative;
+    border: 1px solid var(--border-light);
+}
+
+.program-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.program-header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.program-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="2"/></svg>');
+    background-size: 250px;
+    animation: float 20s linear infinite;
+}
+
+.program-header h3 {
+    color: white;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+}
+
+.program-duration {
+    font-size: 1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.program-body {
+    padding: 40px;
+}
+
+.program-features {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 30px;
+}
+
+.program-features li {
+    margin-bottom: 15px;
+    padding-left: 35px;
+    position: relative;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted-light);
+}
+
+.program-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+    font-size: 1.2rem;
+    animation: scaleIn 0.3s ease;
+}
+
+.program-audience {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border-light);
+    font-size: 1.1rem;
+    color: var(--text-muted-light);
+}
+
+.program-audience strong {
+    color: var(--primary);
+}
+
+.program-footer {
+    padding: 0 40px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.program-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    font-family: var(--font-heading);
+}
+
+.price-note {
+    font-size: 1rem;
+    color: var(--text-muted-light);
+    margin-top: 8px;
+    font-weight: 500;
+}
